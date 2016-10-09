@@ -2,20 +2,16 @@
 
 #include "fenetre.h"
 
-fenetre::fenetre() : QWidget(){
+window::fenetre(QWidget *owner)
+    :QWidget{owner},
+    titre{new QLabel{"",this}}, // construction du titre
+    reel{new QLineEdit{"",this}}, // construction du champs d entree
+    conversion{new QPushButton{"run_project",this}}, // construction du bouton
+    resultat{new QLabel{"",this}} // construction de la sortie
+    {
 
-    // construction du titre
-    titre = new QLabel("", this);
-    // construction du champs d entree
-    reel = new QLineEdit;
-    // construction du bouton
-    conversion = new QPushButton("run_project", this);
-    // construction de la sortie
-    resultat = new QLabel("", this);
     // construction du layout vertical
-    mise_en_forme_V = new QVBoxLayout;
-    // declaration de la fonction
-    void norme_ieee_754(QLineEdit,QLabel);
+    auto mise_en_forme_V = new QVBoxLayout{}; // le layout, il ne sert que dans le constructeur, donc variable locale du constructeur, pas variable membre de la classe
 
     // personnalisation de la fenetre
     setFixedSize(350,200);
@@ -46,12 +42,11 @@ fenetre::fenetre() : QWidget(){
 
     setLayout(mise_en_forme_V);
 
-    // lien entre l event du bouton et la fonction a effectuer
-    connect(conversion, SIGNAL(clicked()),this,SLOT(norme_ieee_754(reel,resultat)));
+    // on connect le click sur le bouton a notre slot onClick
+    connect(conversion, &QPushButton::clicked, this, &window::onClick);
 
 }
 
-void norme_ieee_754(QLineEdit reel, QLabel resultat){
-    QString test = reel.text(); // stockage du reel dans une variable intermediaire
-    resultat.setText(test); // placement du reel dans le widget "resultat"
+void fenetre::onClick(){
+    resultat->setText(reel->text());
 }

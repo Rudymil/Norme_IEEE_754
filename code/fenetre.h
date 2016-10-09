@@ -5,25 +5,24 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton> // cette ligne vous permet de créer des objets de type QPushButton
-#include <QInputDialog> // si vous souhaitez que votre utilisateur saisisse une information
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QFormLayout>
 #include <QLabel>
 
-class fenetre : public QWidget{ // On herite de QWidget (IMPORTANT)
+class window : public QWidget{ // On herite de QWidget (IMPORTANT)
+
+
+        Q_OBJECT // obligatoire pour utiliser les signaux et les slots
 
 
     public:
-        fenetre();
+        window(QWidget * owner = nullptr); // on doit toujours pouvoir passer un parent a un QWidget, c est comme ça que fonctionne le mecanisme de gestion de la memoire de Qt.
+
 
 
     public slots:
-        void norme_ieee_754(QLineEdit,QLabel); // fonction activee par le bouton "conversion"
-
-
-    signals:
-        //clicked();
+        void onClick();
 
 
     private:
@@ -34,7 +33,8 @@ class fenetre : public QWidget{ // On herite de QWidget (IMPORTANT)
 
         QPushButton *conversion; // bouton d enclenchement
 
-        QVBoxLayout *mise_en_forme_V; // mise en forme verticale
+        /* inutile de garder un pointeur sur le layout
+        QVBoxLayout *mise_en_forme_V; // mise en forme verticale */
 
 
 };
