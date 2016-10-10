@@ -10,14 +10,14 @@
 #include <QFormLayout>
 #include <QLabel>
 
-class window : public QWidget{ // On herite de QWidget (IMPORTANT)
+class fenetre : public QWidget{ // On herite de QWidget (IMPORTANT)
 
 
         Q_OBJECT // obligatoire pour utiliser les signaux et les slots
 
 
     public:
-        window(QWidget * owner = nullptr); // on doit toujours pouvoir passer un parent a un QWidget, c est comme ça que fonctionne le mecanisme de gestion de la memoire de Qt.
+        fenetre(QWidget * owner = nullptr); // on doit toujours pouvoir passer un parent a un QWidget, c est comme ça que fonctionne le mecanisme de gestion de la memoire de Qt.
 
 
 
