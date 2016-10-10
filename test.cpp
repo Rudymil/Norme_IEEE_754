@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include<cmath>
+#include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
-//chaque fois que vous utilisez des fonctions de manipulation de chaînes.
+//chaque fois que vous utilisez des fonctions de manipulation de chaÃ®nes.
 #include <string.h>
 
 using namespace std;
@@ -24,16 +24,16 @@ int main(int argc, char *argv[]){
     char binaire_reel[9];
     char binaire_mantisse[23];
     char binaire[32];
-    printf("Le réel à convertir : %s\n\n", reel);
-    // On récupère la longueur de la chaîne dans longueurChaine
+    printf("Le rÃ©el Ã  convertir : %s\n\n", reel);
+    // On rÃ©cupÃ¨re la longueur de la chaÃ®ne dans longueurChaine
     /* = strlen(reel);
-    printf("La longueur du réel à convertir : %d\n\n", longueur_chaine);
+    printf("La longueur du rÃ©el Ã  convertir : %d\n\n", longueur_chaine);
     for(i=0;i<longueur_chaine;i++){
         if (reel[i] == ',' || reel[i] == '.'){
             position = i;
         }
     }
-    printf("La position est à la case: %d\n\n", position);*/
+    printf("La position est Ã  la case: %d\n\n", position);*/
     chiffre = atof(reel);
     entier = floor(chiffre);
     decimale = chiffre - entier;
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
     printf("Le binaire de l'exposant : %s\n\n", binaire_exposant);
     strcat(binaire_signe,binaire_exposant);
     sprintf(binaire,binaire_signe);
-    printf("Le binaire du réel : %s\n\n", binaire);
+    printf("Le binaire du rÃ©el : %s\n\n", binaire);
     strcat(binaire,",");
     for(i=0;i<23;i++){ //Pour obenir 23 chiffres
         decimale=decimale*2;
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
             decimale--;
         }
         else{
-            strcat(binaire,"0");; //Ajout en fin de chaîne
+            strcat(binaire,"0");; //Ajout en fin de chaÃ®ne
         }
         printf("Le binaire : %s\n\n", binaire);
     }
