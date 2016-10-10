@@ -22,9 +22,9 @@ class fenetre : public QWidget{ // On herite de QWidget (IMPORTANT)
 
     private:
         QLabel *titre; // enonce
-        QLabel *resultat; // sortie
         QLineEdit *reel; // champs d entree
         QPushButton *conversion; // bouton d enclenchement
+        QLabel *resultat; // sortie
         /* inutile de garder un pointeur sur le layout
         QVBoxLayout *mise_en_forme_V; // mise en forme verticale */
 
