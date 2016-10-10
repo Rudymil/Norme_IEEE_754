@@ -43,7 +43,7 @@ fenetre::fenetre(QWidget *owner)
     setLayout(mise_en_forme_V);
 
     // on connect le click sur le bouton a notre slot onClick
-    connect(conversion, &QPushButton::clicked, this, &window::onClick);
+    connect(conversion, &QPushButton::clicked, this, &fenetre::onClick);
 
 }
 
