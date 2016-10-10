@@ -7,9 +7,9 @@ int main(int argc, char *argv[]){
 
     QApplication app(argc,argv); // la premiere ligne du main() cree un nouvel objet de type QApplication
 
-    window ecran; // appel au constructeur de la fenetre
+    fenetre programme; // appel au constructeur de la fenetre
 
-    ecran.show(); // affichage de la fenetre
+    programme.show(); // affichage de la fenetre
 
     return app.exec(); // cette methode demarre notre programme et lance donc l affichage des fenetres.
 }
