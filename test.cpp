@@ -48,14 +48,14 @@ int main(int argc, char *argv[]){
     printf("Le chiffre est : %f cad %f + %f\n\n", chiffre,entier,decimale);
     printf("Le signe est : %s\n\n", binaire_signe);
     if (quotient%2 == 0){
-            sprintf(binaire_exposant, "0");
-        }
-        if (quotient%2 == 1){
-            sprintf(binaire_exposant, "1");
-        }
-        printf("Le binaire de l'exposant : %s\n\n", binaire_exposant);
-        quotient = quotient/2;
-        printf("Le quotient est : %d\n\n", quotient);
+        sprintf(binaire_exposant, "0");
+    }
+    if (quotient%2 == 1){
+        sprintf(binaire_exposant, "1");
+    }
+    printf("Le binaire de l'exposant : %s\n\n", binaire_exposant);
+    quotient = quotient/2;
+    printf("Le quotient est : %d\n\n", quotient);
     while(quotient >= 2){
         if (quotient%2 == 0){
             strcat(binaire_exposant, "0");
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
             decimale--;
         }
         else{
-            strcat(binaire,"0");; //Ajout en fin de chaîne
+            strcat(binaire,"0"); //Ajout en fin de chaîne
         }
         printf("Le binaire : %s\n\n", binaire);
     }

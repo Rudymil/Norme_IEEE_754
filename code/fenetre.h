@@ -9,6 +9,10 @@
 #include <QLineEdit>
 #include <QFormLayout>
 #include <QLabel>
+#include <string.h> // chaque fois que vous utilisez des fonctions de manipulation de chaînes.
+#include <stdlib.h>
+
+using namespace std;
 
 class fenetre : public QWidget{ // On herite de QWidget (IMPORTANT)
 

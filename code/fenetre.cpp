@@ -1,7 +1,9 @@
 // contient l implementation des methodes de fenetre, notamment du constructeur.
 
 #include "fenetre.h"
+#include "norme_ieee_754.h"
 
+// classe fenetre
 fenetre::fenetre(QWidget *owner)
     :QWidget{owner},
     titre{new QLabel{"",this}}, // construction du titre
@@ -34,6 +36,10 @@ fenetre::fenetre(QWidget *owner)
     conversion->setToolTip("Convertit et affiche sous forme d'une chaîne de caractères représentant les bits (0,1)");
     //conversion->move(60, 50);
 
+// personalisation du resultat
+    resultat->setAlignment(Qt::AlignCenter);
+    resultat->setFont(QFont("Helvetica", 13));
+
 // ajout des widgets
     mise_en_forme_V->addWidget(titre);
     mise_en_forme_V->addWidget(reel);
@@ -47,6 +53,12 @@ fenetre::fenetre(QWidget *owner)
 
 }
 
+// fonction principale activee par le bouton
 void fenetre::onClick(){
-    resultat->setText(reel->text());
+    //const char* inconnu[32];
+    //resultat->setText(reel->text());
+    //QString champs_entree = reel->text();
+    //const char const_inconnu[32] = reel->text().toStdString().c_str(); // conversion QString -> const char
+    //printf(const_inconnu);
+    norme_ieee_754(reel->text().toStdString().c_str()); // fonction principale dans norme_ieee_754
 }
