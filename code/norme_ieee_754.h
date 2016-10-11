@@ -9,14 +9,16 @@
 
 using namespace std;
 
-void norme_ieee_754(const char* const_reel); // fonction principale
+void norme_ieee_754(const char *const_reel); // fonction principale
 
-char f_signe(char reel); // premiere partie
+void f_signe(char *reel, char *binaire_ieee_754); // premiere partie, decouverte du signe
 
-char f_binaire(char flotant); // deuxieme partie, conversion en binaire
+void f_binaire(char *reel, char *binaire_sans_signe); // deuxieme partie, conversion en binaire
 
-char binaire_ante_coma(int quotient); // calcule le binaire de la partie avant la virgule
+void binaire_ante_coma(int quotient, char *b_a_c); // calcule le binaire de la partie avant la virgule
 
-char binaire_post_coma(float decimale); // calcule le binaire de la partie apres la virgule
+void binaire_post_coma(float decimale, char *b_p_c); // calcule le binaire de la partie apres la virgule
+
+void f_virgule_mantisse(char *binaire_sans_signe); // troisieme partie, decalage de la virgule + mantisse
 
 #endif // NORME_IEEE_754_H
