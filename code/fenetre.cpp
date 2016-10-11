@@ -55,11 +55,7 @@ fenetre::fenetre(QWidget *owner)
 
 // fonction principale activee par le bouton
 void fenetre::onClick(){
-    //const char* inconnu[32];
-    //resultat->setText(reel->text());
-    //QString champs_entree = reel->text();
-    //const char const_inconnu[32] = reel->text().toStdString().c_str(); // conversion QString -> const char
-    //printf(const_inconnu);
-    norme_ieee_754(reel->text().toStdString().c_str()); // fonction principale dans norme_ieee_754
-    resultat->setText(reel->text()); // rajout du text de reel dans le text de resultat
+    char binaire_ieee_754[32]; // chaine de caractere qui contiendra le binaire final
+    norme_ieee_754(reel->text().toStdString().c_str(),binaire_ieee_754); // fonction principale dans norme_ieee_754.cpp
+    resultat->setText(binaire_ieee_754); // rajout du binaire final dans le text de resultat
 }
