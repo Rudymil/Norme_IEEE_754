@@ -19,6 +19,10 @@ void binaire_ante_coma(int quotient, char *b_a_c); // calcule le binaire de la p
 
 void binaire_post_coma(float decimale, char *b_p_c); // calcule le binaire de la partie apres la virgule
 
-void f_virgule_mantisse(char *binaire_sans_signe); // troisieme partie, decalage de la virgule + mantisse
+int f_virgule_mantisse(char *binaire_sans_signe); // troisieme partie, decalage de la virgule + mantisse + renvoie du decalage
+
+void f_exposant(char *binaire_sans_signe, int decalage); // quatrieme partie, formation de l exposant
+
+void remove_coma(char *binaire_exposant); // enleve la virgule et le premier bit implicite
 
 #endif // NORME_IEEE_754_H
