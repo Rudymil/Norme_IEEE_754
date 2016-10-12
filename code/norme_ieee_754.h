@@ -15,13 +15,13 @@ void f_signe(char *reel, char *binaire_ieee_754); // premiere partie, decouverte
 
 void f_binaire(char *reel, char *binaire_sans_signe); // deuxieme partie, conversion en binaire
 
-void binaire_ante_coma(int quotient, char *b_a_c); // calcule le binaire de la partie avant la virgule
+int binaire_ante_coma(int quotient, char *b_a_c); // calcule le binaire de la partie avant la virgule
 
-void binaire_post_coma(float decimale, char *b_p_c); // calcule le binaire de la partie apres la virgule
+void binaire_post_coma(float decimale, int t_b_a_c, char *b_p_c); // calcule le binaire de la partie apres la virgule
 
-int f_virgule_mantisse(char *binaire_sans_signe); // troisieme partie, decalage de la virgule + mantisse + renvoie du decalage
+int f_virgule_mantisse(char *binaire_sans_signe, char *reel); // troisieme partie, decalage de la virgule + mantisse + renvoie du decalage
 
-void f_exposant(char *binaire_sans_signe, int decalage); // quatrieme partie, formation de l exposant
+void f_exposant(char *binaire_sans_signe, char *reel, int decalage); // quatrieme partie, formation de l exposant
 
 void remove_coma(char *binaire_exposant); // enleve la virgule et le premier bit implicite
 

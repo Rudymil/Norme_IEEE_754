@@ -23,13 +23,13 @@ void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){
 
 // troisieme partie, decalage de la virgule + mantisse-
     printf("Troisième partie\n\n");
-    decalage = f_virgule_mantisse(binaire_sans_signe);
+    decalage = f_virgule_mantisse(binaire_sans_signe,reel);
     printf("Le binaire normé avec sa mantisse = %s\n",binaire_sans_signe);
     printf("Le décalage = %d\n\n", decalage);
 
 // quatrieme partie, formation de l exposant-----------
     printf("Quatrieme partie\n\n");
-    f_exposant(binaire_exposant,decalage);
+    f_exposant(binaire_exposant,reel,decalage);
     printf("Le binaire de l'exposant = %s\n\n",binaire_exposant);
 
 // concatenation---------------------------------------
@@ -45,6 +45,7 @@ void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){
 
 }
 
+//*****************************************************************************************************************
 // premiere partie, decouverte du signe----------------------------------------------
 void f_signe(char *reel, char *binaire_ieee_754){
     if (reel[0] == '-'){ // s il s agit d un nombre negatif
@@ -61,21 +62,27 @@ void f_binaire(char *reel, char *binaire_sans_signe){
     float entier; // garder le float !!!
     float decimale;
     int quotient;
+    int t_b_a_c; // taille de la partie binaire avant la virgule
     char b_a_c[32]; // binaire de la partie avant la virgule
     char b_p_c[32]; // binaire de la partie apres la virgule
     chiffre = atof(reel); // conversion char -> float
     entier = floor(chiffre); // determination de la partie entiere
     decimale = chiffre - entier; // determination de la partie decimale
-    if (reel[0] == '-'){ // s il s agit d un nombre negatif
+    printf("Le chiffre = %f\n", chiffre);
+    printf("L entier = %f\n", entier);
+    printf("La decimale = %f\n", decimale);
+    printf("Le signe = %c\n", reel[0]);
+    printf("Le signe = %d\n\n", reel[0]);
+    if (reel[0] == 45 && (entier != 0 || decimale != 0)){ // s il s agit d un nombre negatif different de 0 !!!
         decimale = 1 - decimale;
         printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
         quotient = abs((int)chiffre); // conversion float -> int puis en absolu
     }else{ // s il s agit d un nombre positif
-        printf("Le chiffre est %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
+        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
         quotient = (int)chiffre; // conversion float -> int
     }
-    binaire_ante_coma(quotient,b_a_c); // calcule le binaire de la partie avant la virgule
-    binaire_post_coma(decimale,b_p_c); // calcule le binaire de la partie apres la virgule
+    t_b_a_c = binaire_ante_coma(quotient,b_a_c); // calcule le binaire de la partie avant la virgule
+    binaire_post_coma(decimale,t_b_a_c,b_p_c); // calcule le binaire de la partie apres la virgule
     strcat(b_a_c,"."); // concatenation de la virgule dans b_a_c
     strcat(b_a_c,b_p_c); // concatenation des 2 binaires dans b_a_c
     printf("Le binaire normé = %s\n\n",b_a_c);
@@ -86,12 +93,28 @@ void f_binaire(char *reel, char *binaire_sans_signe){
 }
 
 // troisieme partie, decalage de la virgule + mantisse + renvoie du decalage----------
-int f_virgule_mantisse(char *binaire_sans_signe){
+int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
+
+    float chiffre;
+    float entier; // garder le float !!!
+    float decimale;
     int decalage = 0;
     printf("Le decalage = %d\n\n", decalage);
     int coma = NULL;
     int intermediaire;
     int taille = strlen(binaire_sans_signe);
+    printf("La taille = %d\n\n", taille);
+
+    chiffre = atof(reel); // conversion char -> float
+    entier = floor(chiffre); // determination de la partie entiere
+    decimale = chiffre - entier; // determination de la partie decimale
+    printf("Le chiffre = %f\n", chiffre);
+    printf("L entier = %f\n", entier);
+    printf("La decimale = %f\n", decimale);
+    printf("Le signe = %c\n", reel[0]);
+    printf("Le signe = %d\n\n", reel[0]);
+
+    printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
     // recherche de l index de la variable
     for(int i=0; i<taille; i++){
         if (binaire_sans_signe[i] == 46){
@@ -101,47 +124,106 @@ int f_virgule_mantisse(char *binaire_sans_signe){
     printf("L'index de la virgule = %d\n\n", coma);
     // deplacement de la virgule
     if(coma != NULL){ // si il y en a une
-        for (int k=coma; k>=2; k--){ // jusqu a la deuxieme case
-            intermediaire = binaire_sans_signe[k];
-            binaire_sans_signe[k] = binaire_sans_signe[k-1];
-            binaire_sans_signe[k-1] = intermediaire;
-            printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
-            decalage++; // mesure du decalage de la virgule
-            printf("Le decalage = %d\n\n", decalage);
+        if(entier!=0){ // si s agit d un nombre absolument strictement superieur a 1
+            for (int k=coma; k>=2; k--){ // jusqu a la deuxieme case
+                intermediaire = binaire_sans_signe[k];
+                binaire_sans_signe[k] = binaire_sans_signe[k-1];
+                binaire_sans_signe[k-1] = intermediaire;
+                printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
+                decalage++; // mesure du decalage de la virgule
+                printf("Le decalage = %d\n\n", decalage);
+            }
+        }else{ // si s agit d un nombre absolument inferieur ou egal a 1
+            int un;
+            for(int m=taille-1; m>=0; m--){ // recherche de...
+                if (binaire_sans_signe[m] == 49){ // l index du dernier bit 1
+                    //printf("%c\n\n", binaire_sans_signe[m]);
+                    un = m;
+                }
+            }
+            printf("L'index du premier bit 1 = %d\n\n", un);
+            for (int l=coma; l<un; l++){ // jusqu apres le premier bit 1
+                intermediaire = binaire_sans_signe[l];
+                binaire_sans_signe[l] = binaire_sans_signe[l+1];
+                binaire_sans_signe[l+1] = intermediaire;
+                printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
+                decalage--; // mesure du decalage de la virgule
+                printf("Le decalage = %d\n\n", decalage);
+            }
+            for(int n=0; n<(un-coma); n++){
+                for(int o=0; o<taille; o++){
+                    intermediaire = binaire_sans_signe[o];
+                    binaire_sans_signe[o] = binaire_sans_signe[o+1];
+                    binaire_sans_signe[o+1] = intermediaire;
+                    //printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
+                }
+            }
         }
     }
+    printf("La taille = %d\n\n", taille);
     // rajout des zeros pour une mantisse (apres la virgule) de 23 bits
     if(taille < 25){ // si la taille du binaire n est pas superieur a 23 bits + 2
         for( int j=taille; j< 25; j++){ // alors pour chaque occurence de la difference
-            printf("L'index de la virgule = %d\n\n", j);
+            //printf("La taille = %d\n\n", j);
             strcat(binaire_sans_signe,"0"); // on concatene un zero
             printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
         }
     }
+    printf("La taille = %d\n\n", taille);
     return decalage;
 }
 
 // quatrieme partie, formation de l exposant------------------------------------------
-void f_exposant(char *binaire_exposant, int decalage){
-    int taille;
-    char binaire[32];
-    int true_decalage = decalage + 127; // pour le format 32-bit IEEE 754, le décalage est 28−1−1 = 127
-    printf("Le nouveau décalage = %d\n", true_decalage);
-    binaire_ante_coma(true_decalage,binaire); // on reutilise la fonction pour transformer la partie avant la virgule en bianire
-    sprintf(binaire_exposant,binaire); // ecrit le binaire trouver dans l exposant en binaire
-    printf("Le binaire de l'exposant = %s\n\n", binaire_exposant);
-    taille = strlen(binaire_exposant);
-    printf("La taille du binaire sans signe = %d\n\n", taille);
+void f_exposant(char *binaire_exposant, char *reel, int decalage){
+    float chiffre = atof(reel); // conversion char -> float
+    float entier = floor(chiffre); // determination de la partie entiere
+    float decimale = chiffre - entier; // determination de la partie decimale
+    printf("Le chiffre = %f\n", chiffre);
+    printf("L entier = %f\n", entier);
+    printf("La decimale = %f\n", decimale);
+    printf("Le signe = %c\n", reel[0]);
+    printf("Le signe = %d\n\n", reel[0]);
+    if (reel[0] == 45){ // s il s agit d un nombre negatif
+        decimale = 1 - decimale;
+        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
+    }else{ // s il s agit d un nombre positif
+        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
+    }
+    if(entier != 0){ // si le chiffre est different de 0
+        int taille;
+        char binaire[32];
+        int true_decalage = decalage + 127; // pour le format 32-bit IEEE 754, le décalage est 28−1−1 = 127
+        printf("Le nouveau décalage = %d\n", true_decalage);
+        binaire_ante_coma(true_decalage,binaire); // on reutilise la fonction pour transformer la partie avant la virgule en bianire
+        sprintf(binaire_exposant,binaire); // ecrit le binaire trouver dans l exposant en binaire
+        printf("Le binaire de l'exposant = %s\n\n", binaire_exposant);
+        taille = strlen(binaire_exposant);
+        printf("La taille du binaire sans signe = %d\n\n", taille);
+        if(taille<8){ // si l exposant ne contient pas 8 bit !
+            char zero[32];
+            sprintf(zero,"0"); // on rempli la new chaine d au moins un 1
+            taille++; // la taille augmente
+            while(taille<8){ // mais tant que ce n est pas suffisant
+                strcat(zero,"0"); // on rempli la new chaine d un 0
+                taille++; // la taille augmente
+            }
+            strcat(zero,binaire_exposant); // on concatene la chaine de 0 avec le binaire
+            sprintf(binaire_exposant,zero); // on eccrase le tout dans la chaine a renvoyer
+        }
+    }else{ // EXCEPTION du zero
+        sprintf(binaire_exposant,"00000000"); // l exposant comportera que des zeros (8 zeros)
+    }
 }
 
 // Fonctions Annexes------------------------------------------------------------------
-void binaire_ante_coma(int quotient, char *b_a_c){ // calcule le binaire de la partie avant la virgule
+int binaire_ante_coma(int quotient, char *b_a_c){ // calcule le binaire de la partie avant la virgule
 
     char binaire[32];
     int taille;
     int longueur;
     int intermediaire;
 
+    printf("Le quotient = %d\n\n", quotient);
     if (quotient%2 == 0){ // s il ne reste rien a la division par 2
         sprintf(binaire, "0"); // on ecrit 0
     }
@@ -151,7 +233,7 @@ void binaire_ante_coma(int quotient, char *b_a_c){ // calcule le binaire de la p
     printf("Le binaire avant la virgule = %s\n\n", binaire);
     quotient = quotient/2;
     printf("Le quotient = %d\n\n", quotient);
-    while(quotient >= 2){ // tant que le quotient n est pas inferieur a 2
+    while(quotient > 0){ // tant que le quotient  est superieur ou egal a 2
         if (quotient%2 == 0){ // s il ne reste rien a la division par 2
             strcat(binaire, "0"); // on rajoute 0
         }
@@ -161,8 +243,7 @@ void binaire_ante_coma(int quotient, char *b_a_c){ // calcule le binaire de la p
         printf("Le binaire avant la virgule = %s\n\n", binaire);
         quotient = quotient/2;
         printf("Le quotient = %d\n\n", quotient);
-    }
-    strcat(binaire, "1"); // le binaire de la fin !
+    };
     printf("Le binaire avant la virgule = %s\n\n", binaire);
 
     // ecriture du binaire a l endroit
@@ -181,21 +262,25 @@ void binaire_ante_coma(int quotient, char *b_a_c){ // calcule le binaire de la p
     printf("Le binaire avant la virgule = %s\n\n", binaire);
     sprintf(b_a_c,binaire); // on ecrit le binaire trouve dans le binaire de la partie avant la virgule
     printf("Le binaire avant la virgule = %s\n\n", b_a_c);
+    return taille; // renvoie la taille du binaire
 
 }
 
-void binaire_post_coma(float decimale, char *b_p_c){ // calcule le binaire de la partie apres la virgule
-    char binaire[32]; // bianaire final
-    int precision = 10; // nombre de bit apres la virgule
+void binaire_post_coma(float decimale, int t_b_a_c, char *b_p_c){ // calcule le binaire de la partie apres la virgule
+    char binaire[32]; // binaire final
+    int precision = 23 - (t_b_a_c + 1); // nombre de bit apres la virgule
     decimale=decimale*2; // multiplications par deux successives
+    printf("La decimale x2 = %f\n\n", decimale);
     if(decimale>=1){
         sprintf(binaire,"1"); // on ecrit 0
         decimale--;
         printf("Le binaire après la virgule = %s\n\n", binaire);
+        printf("La decimale x2 = %f\n\n", decimale);
     }
     else{
         sprintf(binaire,"0"); // on ecrit 1
         printf("Le binaire après la virgule = %s\n\n", binaire);
+        printf("La decimale x2 = %f\n\n", decimale);
     }
     for(int i=0; i<precision-1; i++){ // pour chaque occurence de la precision moins 1 car une occurence deja faite !
         decimale=decimale*2; // multiplications par deux successives
@@ -203,10 +288,12 @@ void binaire_post_coma(float decimale, char *b_p_c){ // calcule le binaire de la
             strcat(binaire,"1"); // on rajoute 1
             decimale--;
             printf("Le binaire après la virgule = %s\n\n", binaire);
+            printf("La decimale x2 = %f\n\n", decimale);
         }
         else{
             strcat(binaire,"0"); // on rajoute 0
             printf("Le binaire après la virgule = %s\n\n", binaire);
+            printf("La decimale x2 = %f\n\n", decimale);
         }
     }
     printf("Le binaire après la virgule = %s\n\n", binaire);
