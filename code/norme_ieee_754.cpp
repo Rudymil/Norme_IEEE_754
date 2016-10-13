@@ -133,7 +133,7 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
                 decalage++; // mesure du decalage de la virgule
                 printf("Le decalage = %d\n\n", decalage);
             }
-        }else{ // si s agit d un nombre absolument inferieur ou egal a 1
+        }else if(decimale != 0){ // si s agit d un nombre absolument inferieur ou egal a 1 mais different de zero
             int un;
             for(int m=taille-1; m>=0; m--){ // recherche de...
                 if (binaire_sans_signe[m] == 49){ // l index du dernier bit 1
@@ -170,6 +170,11 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
         }
     }
     printf("La taille = %d\n\n", taille);
+    // rajout des zeros pour une mantisse (apres la virgule) de 23 bits
+    if(taille > 25){ // si la taille du binaire est superieur a 23 bits + 2
+            binaire_sans_signe [25] = '\0'; // on coupe la chaîne a la 25eme case
+            printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
+    }
     return decalage;
 }
 

@@ -16,12 +16,12 @@ fenetre::fenetre(QWidget *owner)
     auto mise_en_forme_V = new QVBoxLayout{}; // le layout, il ne sert que dans le constructeur, donc variable locale du constructeur, pas variable membre de la classe
 
 // personnalisation de la fenetre
-    setFixedSize(350,200);
+    setFixedSize(400,175);
     setWindowIcon(QIcon("icone.png"));
     setWindowTitle("Norme IEEE 754");
 
 // personalisation du titre
-    titre->setText("Saisissez un nombre réel puis convertissez-le en\nsimple précision (32 bits) conformément à la\nnorme IEEE 754");
+    titre->setText("Saisissez un nombre réel puis\nappliquez la conversion en simple précision (32 bits)\nconformément à la norme IEEE 754");
     titre->setFont(QFont("Helvetica", 11));
     titre->setAlignment(Qt::AlignCenter);
 
