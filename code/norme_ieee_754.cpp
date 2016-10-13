@@ -65,7 +65,7 @@ void f_binaire(char *reel, char *binaire_sans_signe){
     int t_b_a_c; // taille de la partie binaire avant la virgule
     char b_a_c[32]; // binaire de la partie avant la virgule
     char b_p_c[32]; // binaire de la partie apres la virgule
-    chiffre = atof(reel); // conversion char -> float
+    chiffre = abs(atof(reel)); // conversion char -> float
     entier = floor(chiffre); // determination de la partie entiere
     decimale = chiffre - entier; // determination de la partie decimale
     printf("Le chiffre = %f\n", chiffre);
@@ -73,14 +73,8 @@ void f_binaire(char *reel, char *binaire_sans_signe){
     printf("La decimale = %f\n", decimale);
     printf("Le signe = %c\n", reel[0]);
     printf("Le signe = %d\n\n", reel[0]);
-    if (reel[0] == 45 && (entier != 0 || decimale != 0)){ // s il s agit d un nombre negatif different de 0 !!!
-        decimale = 1 - decimale;
-        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
-        quotient = abs((int)chiffre); // conversion float -> int puis en absolu
-    }else{ // s il s agit d un nombre positif
-        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
-        quotient = (int)chiffre; // conversion float -> int
-    }
+    printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
+    quotient = (int)chiffre; // conversion float -> int
     t_b_a_c = binaire_ante_coma(quotient,b_a_c); // calcule le binaire de la partie avant la virgule
     binaire_post_coma(decimale,t_b_a_c,b_p_c); // calcule le binaire de la partie apres la virgule
     strcat(b_a_c,"."); // concatenation de la virgule dans b_a_c
@@ -105,7 +99,7 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
     int taille = strlen(binaire_sans_signe);
     printf("La taille = %d\n\n", taille);
 
-    chiffre = atof(reel); // conversion char -> float
+    chiffre = abs(atof(reel)); // conversion char -> float
     entier = floor(chiffre); // determination de la partie entiere
     decimale = chiffre - entier; // determination de la partie decimale
     printf("Le chiffre = %f\n", chiffre);
@@ -133,7 +127,7 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
                 decalage++; // mesure du decalage de la virgule
                 printf("Le decalage = %d\n\n", decalage);
             }
-        }else if(decimale != 0){ // si s agit d un nombre absolument inferieur ou egal a 1 mais different de zero
+        }else if(decimale!=0){ // si s agit d un nombre absolument inferieur ou egal a 1 mais different de zero
             int un;
             for(int m=taille-1; m>=0; m--){ // recherche de...
                 if (binaire_sans_signe[m] == 49){ // l index du dernier bit 1
@@ -150,7 +144,7 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
                 decalage--; // mesure du decalage de la virgule
                 printf("Le decalage = %d\n\n", decalage);
             }
-            for(int n=0; n<(un-coma); n++){
+            for(int n=0; n<(un-coma); n++){ // suppression des zeros avant le premier avant ou avant la virgule
                 for(int o=0; o<taille; o++){
                     intermediaire = binaire_sans_signe[o];
                     binaire_sans_signe[o] = binaire_sans_signe[o+1];
@@ -160,6 +154,7 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
             }
         }
     }
+    taille = strlen(binaire_sans_signe);
     printf("La taille = %d\n\n", taille);
     // rajout des zeros pour une mantisse (apres la virgule) de 23 bits
     if(taille < 25){ // si la taille du binaire n est pas superieur a 23 bits + 2
@@ -169,18 +164,21 @@ int f_virgule_mantisse(char *binaire_sans_signe, char *reel){
             printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
         }
     }
+    taille = strlen(binaire_sans_signe);
     printf("La taille = %d\n\n", taille);
     // rajout des zeros pour une mantisse (apres la virgule) de 23 bits
     if(taille > 25){ // si la taille du binaire est superieur a 23 bits + 2
             binaire_sans_signe [25] = '\0'; // on coupe la chaîne a la 25eme case
             printf("Le nouveau binaire = %s\n\n", binaire_sans_signe);
     }
+    taille = strlen(binaire_sans_signe);
+    printf("La taille = %d\n\n", taille);
     return decalage;
 }
 
 // quatrieme partie, formation de l exposant------------------------------------------
 void f_exposant(char *binaire_exposant, char *reel, int decalage){
-    float chiffre = atof(reel); // conversion char -> float
+    float chiffre = abs(atof(reel)); // conversion char -> float
     float entier = floor(chiffre); // determination de la partie entiere
     float decimale = chiffre - entier; // determination de la partie decimale
     printf("Le chiffre = %f\n", chiffre);
@@ -188,35 +186,34 @@ void f_exposant(char *binaire_exposant, char *reel, int decalage){
     printf("La decimale = %f\n", decimale);
     printf("Le signe = %c\n", reel[0]);
     printf("Le signe = %d\n\n", reel[0]);
-    if (reel[0] == 45){ // s il s agit d un nombre negatif
-        decimale = 1 - decimale;
-        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
-    }else{ // s il s agit d un nombre positif
-        printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
-    }
-    if(entier != 0){ // si le chiffre est different de 0
+    printf("Le chiffre est : %f c-a-d %f + %f\n\n", chiffre,entier,decimale);
+    if(entier == 0 && decimale == 0){ // s il s agit de zero a convertir
+        sprintf(binaire_exposant,"00000000"); // l exposant comportera que des zeros (8 zeros)
+    }else{ // sinon
         int taille;
         char binaire[32];
         int true_decalage = decalage + 127; // pour le format 32-bit IEEE 754, le décalage est 28−1−1 = 127
-        printf("Le nouveau décalage = %d\n", true_decalage);
-        binaire_ante_coma(true_decalage,binaire); // on reutilise la fonction pour transformer la partie avant la virgule en bianire
-        sprintf(binaire_exposant,binaire); // ecrit le binaire trouver dans l exposant en binaire
-        printf("Le binaire de l'exposant = %s\n\n", binaire_exposant);
-        taille = strlen(binaire_exposant);
-        printf("La taille du binaire sans signe = %d\n\n", taille);
-        if(taille<8){ // si l exposant ne contient pas 8 bit !
-            char zero[32];
-            sprintf(zero,"0"); // on rempli la new chaine d au moins un 1
-            taille++; // la taille augmente
-            while(taille<8){ // mais tant que ce n est pas suffisant
-                strcat(zero,"0"); // on rempli la new chaine d un 0
+        if(true_decalage < 255 && true_decalage > 0){ // si le decalage est compris entre 0 et 255
+            printf("Le nouveau décalage = %d\n", true_decalage);
+            binaire_ante_coma(true_decalage,binaire); // on reutilise la fonction pour transformer la partie avant la virgule en bianire
+            sprintf(binaire_exposant,binaire); // ecrit le binaire trouver dans l exposant en binaire
+            printf("Le binaire de l'exposant = %s\n\n", binaire_exposant);
+            taille = strlen(binaire_exposant);
+            printf("La taille du binaire sans signe = %d\n\n", taille);
+            if(taille<8){ // si l exposant ne contient pas 8 bit !
+                char zero[32];
+                sprintf(zero,"0"); // on rempli la new chaine d au moins un 1
                 taille++; // la taille augmente
+                while(taille<8){ // mais tant que ce n est pas suffisant
+                    strcat(zero,"0"); // on rempli la new chaine d un 0
+                    taille++; // la taille augmente
+                }
+                strcat(zero,binaire_exposant); // on concatene la chaine de 0 avec le binaire
+                sprintf(binaire_exposant,zero); // on eccrase le tout dans la chaine a renvoyer
             }
-            strcat(zero,binaire_exposant); // on concatene la chaine de 0 avec le binaire
-            sprintf(binaire_exposant,zero); // on eccrase le tout dans la chaine a renvoyer
+        }else if(true_decalage > 255){ // les NaNs et les infinis ont un exposant decale de 128+127=255 ; tous les bits du champ "exposant" sont donc à 1.
+            sprintf(binaire_exposant,"11111111"); // l exposant comportera que des un (8 un)
         }
-    }else{ // EXCEPTION du zero
-        sprintf(binaire_exposant,"00000000"); // l exposant comportera que des zeros (8 zeros)
     }
 }
 
