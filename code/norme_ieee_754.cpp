@@ -9,35 +9,55 @@ void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){
     char reel[85];
     int decalage(0); // valeur
     sprintf(reel, const_reel); // converti ou plutot copie const char* -> char
-    printf("Le réel à convertir = %s\n\n",reel);
+
+    // tests unittaires
+    // sprintf(reel,"-0"); // 1000 0000 0000 0000 0000 0000 0000 0000
+    // sprintf(reel,"0"); // 0000 0000 0000 0000 0000 0000 0000 0000
+    // sprintf(reel,"-1"); // 1011 1111 1111 0000 0000 0000 0000 0000
+    // sprintf(reel,"1"); // 0011 1111 1111 0000 0000 0000 0000 0000
+    // sprintf(reel,"-118.625"); // 1100 0010 1110 1101 0100 0000 0000 0000
+    // sprintf(reel,"-6.625"); // 1100 0000 1101 0100 0000 0000 0000 0000
+
+    printf("\n******************************************\n");
+    printf("* Le réel à convertir = %s *\n",reel);
+    printf("******************************************\n\n");
 
 // premiere partie, decouverte du signe---------------
-    printf("Première partie\n\n");
+    // printf("Première partie\n\n");
     f_signe(reel,binaire_ieee_754);
-    printf("Le signe du binaire normé = %s\n\n",binaire_ieee_754);
+    printf("****************\n");
+    printf("* Le signe = %s *\n",binaire_ieee_754);
+    printf("****************\n\n");
 
 // deuxieme partie, conversion en binaire-------------
-    printf("Deuxième partie\n\n");
+    // printf("Deuxième partie\n\n");
     f_binaire(reel,binaire_sans_signe);
-    printf("Le binaire normé = %s\n\n",binaire_sans_signe);
+    printf("****************************************\n");
+    printf("* Le binaire = %s *\n",binaire_sans_signe);
+    printf("****************************************\n\n");
 
 // troisieme partie, decalage de la virgule + mantisse-
-    printf("Troisième partie\n\n");
+    // printf("Troisième partie\n\n");
     decalage = f_virgule_mantisse(binaire_sans_signe,reel);
-    printf("Le binaire normé avec sa mantisse = %s\n",binaire_sans_signe);
-    printf("Le décalage = %d\n\n", decalage);
+    printf("*******************************************\n");
+    printf("* La mantisse = %s *\n",binaire_sans_signe);
+    printf("*******************************************\n");
+    printf("* Le décalage = %d                       *\n", decalage);
+    printf("*******************************************\n\n");
 
 // quatrieme partie, formation de l exposant-----------
-    printf("Quatrieme partie\n\n");
+    // printf("Quatrieme partie\n\n");
     f_exposant(binaire_exposant,reel,decalage);
-    printf("Le binaire de l'exposant = %s\n\n",binaire_exposant);
+    printf("*************************\n");
+    printf("* L'exposant = %s *\n",binaire_exposant);
+    printf("*************************\n\n");
 
 // concatenation---------------------------------------
     strcat(binaire_ieee_754,binaire_exposant); // concatenation du signe avec l exposant
-    printf("Le signe + l'exposant = %s\n\n",binaire_ieee_754);
+    // printf("Le signe + l'exposant = %s\n\n",binaire_ieee_754);
 
     remove_coma(binaire_sans_signe); // enleve la virgule et le premier bit implicite
-    printf("La mantisse = %s\n\n",binaire_sans_signe);
+    // printf("La mantisse = %s\n\n",binaire_sans_signe);
 
     strcat(binaire_ieee_754,binaire_sans_signe); // concatenation du signe et de l exposant avec la mantisse
 // affichage du resultat final dans la console---
@@ -346,7 +366,8 @@ void remove_coma(char *binaire_exposant){ // enleve la virgule et le premier bit
 void affichage_console(char *binaire_ieee_754, char *reel){ // affichage du resultat final dans la console
 
     int taille;
-    printf("Le binaire de %s selon la norme IEEE 754 = ",reel);
+    printf("**************************************************************************************************\n");
+    printf("* Le binaire de %s selon la norme IEEE 754 = ",reel);
     taille = strlen(binaire_ieee_754); // extraction de la taille du binaire final
 
     for(int i=0; i<taille; i++){
@@ -355,8 +376,8 @@ void affichage_console(char *binaire_ieee_754, char *reel){ // affichage du resu
         }
         printf("%c",binaire_ieee_754[i]); // %c pour afficher la valeur en ASCII !
     }
-    printf("\n");
-    printf("Le binaire de %s selon la norme IEEE 754 =",reel);
+    printf("      *\n");
+    printf("* Le binaire de %s selon la norme IEEE 754 =",reel);
     taille = strlen(binaire_ieee_754); // extraction de la taille du binaire final
     for(int i=0; i<taille; i++){
         if(i%4 == 0){
@@ -364,7 +385,7 @@ void affichage_console(char *binaire_ieee_754, char *reel){ // affichage du resu
         }
         printf("%c",binaire_ieee_754[i]); // %c pour afficher la valeur en ASCII !
     }
-    printf("\n\n");
+    printf(" *\n**************************************************************************************************\n\n");
 
 }
 // *****************************************************************************************************************
