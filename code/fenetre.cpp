@@ -17,7 +17,7 @@ fenetre::fenetre(QWidget *owner)
 
 // personnalisation de la fenetre
     setFixedSize(400,175);
-    setWindowIcon(QIcon("icone.png"));
+    // setWindowIcon(QIcon("icone.png"));
     setWindowTitle("Norme IEEE 754");
 
 // personalisation du titre
@@ -55,7 +55,16 @@ fenetre::fenetre(QWidget *owner)
 
 // fonction principale activee par le bouton
 void fenetre::onClick(){
-    char binaire_ieee_754[32]; // chaine de caractere qui contiendra le binaire final
-    norme_ieee_754(reel->text().toStdString().c_str(),binaire_ieee_754); // fonction principale dans norme_ieee_754.cpp
-    resultat->setText(binaire_ieee_754); // rajout du binaire final dans le text de resultat
+    // si la chaine contient un reel   positif a virgule                ou                                negatif a virgule                 ou                                positif sans virgule ou                            negatif sans virgule ET on accepte que le point !!!
+    if((reel->text().contains(QRegExp("^[\\d]{1,10}\\.{1}[\\d]{1,6}$")) || reel->text().contains(QRegExp("^-[\\d]{1,10}\\.{1}[\\d]{1,6}$")) || reel->text().contains(QRegExp("^[\\d]{1,10}$")) || reel->text().contains(QRegExp("^-[\\d]{1,10}$"))) && !reel->text().contains(QRegExp(","))){
+        char binaire_ieee_754[32]; // chaine de caractere qui contiendra le binaire final
+        norme_ieee_754(reel->text().toStdString().c_str(),binaire_ieee_754); // fonction principale dans norme_ieee_754.cpp
+        resultat->setText(binaire_ieee_754); // rajout du binaire final dans le text de resultat
+    }else if(!reel->text().isEmpty()){ // sinon
+        resultat->setText(""); // rajout rien du tout
+        QMessageBox *msgBox = new QMessageBox(QMessageBox::Critical, "Erreur d'entrée", ""); // construction d une info-bulle
+        msgBox->setText("<p align='center'>Le réel doit correspondre aux patrons suivants :</p>\n<p align='center'>xxxxxxxxxx</p>\n<p align='center'>-xxxxxxxxxx</p>\n<p align='center'>xxxxxxxxxx.xxxxxx</p>\n<p align='center'>-xxxxxxxxxx.xxxxxx</p>"); // HTML !
+        msgBox->setFont(QFont("Helvetica", 9));
+        msgBox->exec(); // execution de l info bulle
+    }
 }

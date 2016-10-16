@@ -7,8 +7,9 @@
 #include <QPushButton> // cette ligne vous permet de créer des objets de type QPushButton
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include <QFormLayout>
+// #include <QFormLayout>
 #include <QLabel>
+#include <QMessageBox>
 #include <string.h> // chaque fois que vous utilisez des fonctions de manipulation de chaînes.
 #include <stdlib.h>
 
