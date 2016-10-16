@@ -118,6 +118,8 @@ Elle appelle cependant les deux fonctions "binaire_post_coma" et "binaire_post_c
 
 <a href="http://shugo.developpez.com/tutoriels/regexqt/">Utilisation des Regex avec Qt</a>
 
+<a href="http://blog.wax-o.com/2014/04/tutoriel-un-guide-pour-bien-commencer-avec-markdown/">[ Tutoriel ] un guide pour bien commencer avec markdown</a>
+
 <p>Merci à tous ceux qui m'ont aidé en résolvant mes problèmes rencontrés :</p>
 
 <a href="https://openclassrooms.com/forum/sujet/passage-de-valeur-par-la-methode-connect-qt?page=1#message-91333711">Passage de valeur par la méthode "connect" Qt</a>
