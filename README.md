@@ -45,7 +45,7 @@ Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2
 <p>Voici la seule classe utilisée dans ce projet et écrite dans <strong>"fenetre.h"</strong>. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
 
 <p>fenetre : public QWidget<br/>
-____public :<br/>
+____public:<br/>
 ________fenetre(QWidget * owner = nullptr)<br/>
 ____private:<br/>
 ________QLabel *titre<br/>
