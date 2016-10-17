@@ -44,28 +44,28 @@ Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2
 
 <p>Voici la seule classe utilisée dans ce projet. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
 
-<p> _________________________________________________<br/>
-|                                                 |\<br/>
-|	<strong>fenetre.h</strong>                                   |\<br/>
-|	 ___________________________________________  |__\<br/>
-|	|                                           |     |<br/>
-|	|	fenetre : public QWidget                |     |<br/>
-|	|___________________________________________|     |<br/>
-|	|                                           |     |<br/>
-|	|	public :                                |     |<br/>
-|	|		fenetre(QWidget * owner = nullptr)  |     |<br/>
-|	|                                           |     |<br/>
-|	|	private:                                |     |<br/>
-|	|		QLabel *titre                       |     |<br/>
-|	|		QLineEdit *reel                     |     |<br/>
-|	|       QPushButton *conversion             |     |<br/>
-|	|       QLabel *resultat                    |     |<br/>
-|	|___________________________________________|     |<br/>
-|	|                                           |     |<br/>
-|	|	public slots:                           |     |<br/>
-|	|		void onClick()                      |     |<br/>
-|	|___________________________________________|     |<br/>
-|_____________________________________________________|</p>
+_________________________________________________
+|                                                 |\
+|	<strong>fenetre.h</strong>                                   |\
+|	 ___________________________________________  |__\
+|	|                                           |     |
+|	|	fenetre : public QWidget                |     |
+|	|___________________________________________|     |
+|	|                                           |     |
+|	|	public :                                |     |
+|	|		fenetre(QWidget * owner = nullptr)  |     |
+|	|                                           |     |
+|	|	private:                                |     |
+|	|		QLabel *titre                       |     |
+|	|		QLineEdit *reel                     |     |
+|	|       QPushButton *conversion             |     |
+|	|       QLabel *resultat                    |     |
+|	|___________________________________________|     |
+|	|                                           |     |
+|	|	public slots:                           |     |
+|	|		void onClick()                      |     |
+|	|___________________________________________|     |
+|_____________________________________________________|
 
 ####  Description
 
@@ -123,11 +123,11 @@ Elle appelle cependant les deux fonctions "binaire_post_coma" et "binaire_post_c
 
 ####  Installation
 
-Pour utiliser l'application, il suffit tout simplement de lancer un des exécutables suivants :
+<p>Pour utiliser l'application, il suffit tout simplement de lancer un des exécutables suivants :</p>
 
-build-code-Desktop_Qt_5_7_0_MinGW_32bit-Debug\debug\code.exe
-build-code-Desktop_Qt_5_7_0_MinGW_32bit-Profile\release\code.exe
-build-code-Desktop_Qt_5_7_0_MinGW_32bit-Release\release\code.exe
+<p>build-code-Desktop_Qt_5_7_0_MinGW_32bit-Debug\debug\code.exe<br/>
+build-code-Desktop_Qt_5_7_0_MinGW_32bit-Profile\release\code.exe<br/>
+build-code-Desktop_Qt_5_7_0_MinGW_32bit-Release\release\code.exe</p>
 
 ####  Bibliographie
 
