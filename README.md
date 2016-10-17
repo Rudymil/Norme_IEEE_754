@@ -42,30 +42,18 @@ Une note de 0 sera attribuée en cas de plagiat ou similitude des livrables.</p>
 <p>Le code source se trouve dans le répertoire "code".<br/>
 Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2013, 32 bit) et compilé sous MinGW 32bit (Debug, Profile, Release).</p>
 
-<p>Voici la seule classe utilisée dans ce projet. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
+<p>Voici la seule classe utilisée dans ce projet et écrite dans <strong>"fenetre.h"</strong>. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
 
-<p>._________________________________________________<br/>
-|.................................................|\<br/>
-|...<strong>fenetre.h</strong>.....................................|.\<br/>
-|....___________________________________________..|__\<br/>
-|...|...........................................|.....|<br/>
-|...|...fenetre : public QWidget................|.....|<br/>
-|...|___________________________________________|.....|<br/>
-|...|...........................................|.....|<br/>
-|...|...public :................................|.....|<br/>
-|...|.......fenetre(QWidget * owner = nullptr)..|.....|<br/>
-|...|...........................................|.....|<br/>
-|...|...private:................................|.....|<br/>
-|...|.......QLabel *titre.......................|.....|<br/>
-|...|.......QLineEdit *reel.....................|.....|<br/>
-|...|.......QPushButton *conversion.............|.....|<br/>
-|...|.......QLabel *resultat....................|.....|<br/>
-|...|___________________________________________|.....|<br/>
-|...|...........................................|.....|<br/>
-|...|...public slots:...........................|.....|<br/>
-|...|.......void onClick()......................|.....|<br/>
-|...|___________________________________________|.....|<br/>
-|_____________________________________________________|</p>
+<p>fenetre : public QWidget<br/>
+____public :<br/>
+________fenetre(QWidget * owner = nullptr)<br/>
+____private:<br/>
+________QLabel *titre<br/>
+________QLineEdit *reel<br/>
+________QPushButton *conversion<br/>
+________QLabel *resultat<br/>
+____public slots:<br/>
+________void onClick()</p>
 
 ####  Description
 
