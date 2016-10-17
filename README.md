@@ -42,9 +42,36 @@ Une note de 0 sera attribuée en cas de plagiat ou similitude des livrables.</p>
 <p>Le code source se trouve dans le répertoire "code".<br/>
 Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2013, 32 bit) et compilé sous MinGW 32bit (Debug, Profile, Release).</p>
 
+<p>Voici la seule classe utilisée dans ce projet. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
+
+<p> _________________________________________________
+<br/>|                                                 |\
+<br/>|	<strong>fenetre.h</strong>                                     | \
+<br/>|	 ___________________________________________  |__\
+<br/>|	|                                           |     |
+<br/>|	|	fenetre : public QWidget                |     |
+<br/>|	|___________________________________________|     |
+<br/>|	|                                           |     |
+<br/>|	|	public :                                |     |
+<br/>|	|		fenetre(QWidget * owner = nullptr)  |     |
+<br/>|	|                                           |     |
+<br/>|	|	private:                                |     |
+<br/>|	|		QLabel *titre                       |     |
+<br/>|	|		QLineEdit *reel                     |     |
+<br/>|	|       QPushButton *conversion             |     |
+<br/>|	|       QLabel *resultat                    |     |
+<br/>|	|___________________________________________|     |
+<br/>|	|                                           |     |
+<br/>|	|	public slots:                           |     |
+<br/>|	|		void onClick()                      |     |
+<br/>|	|___________________________________________|     |
+<br/>|_____________________________________________________|</p>
+
+####  Description
+
 <p>Après l'appel du constructeur de la fenêtre dans "main.cpp", le code se divise en deux parties.</p>
 
-<p>Dans "fenetre.cpp" se trouve le constructeur de la fenêtre et la fonction connectée au bouton :</p>
+<p>Dans <strong>"fenetre.cpp"</strong> se trouve le constructeur de la fenêtre et la fonction connectée au bouton :</p>
 
 <code>fenetre::fenetre(QWidget *owner):QWidget{owner},titre{new QLabel{"",this}},reel{new QLineEdit{"",this}},conversion{new QPushButton{"run_project",this}},resultat{new QLabel{"",this}}{...}</code>
 
@@ -54,7 +81,7 @@ Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2
 
 <p>Cette fonction s'assure que le réel à convertir est correctement écrit.</p>
 
-<p>Dans "norme_ieee_754.cpp" se trouve la fonction principale appelée dans "fenetre.cpp" et toutes les fonctions annexes :</p>
+<p>Dans <strong>"norme_ieee_754.cpp"</strong> se trouve la fonction principale appelée dans "fenetre.cpp" et toutes les fonctions annexes :</p>
 
 <code>void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){...}</code>
 
@@ -93,6 +120,14 @@ Elle appelle cependant les deux fonctions "binaire_post_coma" et "binaire_post_c
 <code>void affichage_console(char *binaire_ieee_754, char *reel){...}</code>
 
 <p>Cette fonction gère un affichage propre du résultat final dans le terminal.</p>
+
+####  Installation
+
+Pour utiliser l'application, il suffit tout simplement de lancer un des exécutables suivants :
+
+build-code-Desktop_Qt_5_7_0_MinGW_32bit-Debug\debug\code.exe
+build-code-Desktop_Qt_5_7_0_MinGW_32bit-Profile\release\code.exe
+build-code-Desktop_Qt_5_7_0_MinGW_32bit-Release\release\code.exe
 
 ####  Bibliographie
 

@@ -57,14 +57,22 @@ fenetre::fenetre(QWidget *owner)
 void fenetre::onClick(){
     // si la chaine contient un reel   positif a virgule                ou                                negatif a virgule                 ou                                positif sans virgule ou                            negatif sans virgule ET on accepte que le point !!!
     if((reel->text().contains(QRegExp("^[\\d]{1,10}\\.{1}[\\d]{1,6}$")) || reel->text().contains(QRegExp("^-[\\d]{1,10}\\.{1}[\\d]{1,6}$")) || reel->text().contains(QRegExp("^[\\d]{1,10}$")) || reel->text().contains(QRegExp("^-[\\d]{1,10}$"))) && !reel->text().contains(QRegExp(","))){
-        char binaire_ieee_754[32]; // chaine de caractere qui contiendra le binaire final
-        norme_ieee_754(reel->text().toStdString().c_str(),binaire_ieee_754); // fonction principale dans norme_ieee_754.cpp
-        resultat->setText(binaire_ieee_754); // rajout du binaire final dans le text de resultat
+        if(reel->text().size() <= 85){ // si la taille du reel rentre n est pas trop grande
+            char binaire_ieee_754[32]; // chaine de caractere qui contiendra le binaire final
+            norme_ieee_754(reel->text().toStdString().c_str(),binaire_ieee_754); // fonction principale dans norme_ieee_754.cpp
+            resultat->setText(binaire_ieee_754); // rajout du binaire final dans le text de resultat
+        }else{ // sinon // en fait on ne rentre jamais dans cette boucle else car la taille est deja verifiee par les QRegExp
+            resultat->setText(""); // rajout rien du tout
+            QMessageBox *msgBox2 = new QMessageBox(QMessageBox::Critical, "Erreur d'entrée", ""); // construction d une info-bulle
+            msgBox2->setText("<p align='center'>Le réel rentré est trop long !</p>"); // HTML !
+            msgBox2->setFont(QFont("Helvetica", 9));
+            msgBox2->exec(); // execution de l info bulle
+        }
     }else if(!reel->text().isEmpty()){ // sinon
         resultat->setText(""); // rajout rien du tout
-        QMessageBox *msgBox = new QMessageBox(QMessageBox::Critical, "Erreur d'entrée", ""); // construction d une info-bulle
-        msgBox->setText("<p align='center'>Le réel doit correspondre aux patrons suivants :</p>\n<p align='center'>xxxxxxxxxx</p>\n<p align='center'>-xxxxxxxxxx</p>\n<p align='center'>xxxxxxxxxx.xxxxxx</p>\n<p align='center'>-xxxxxxxxxx.xxxxxx</p>"); // HTML !
-        msgBox->setFont(QFont("Helvetica", 9));
-        msgBox->exec(); // execution de l info bulle
+        QMessageBox *msgBox1 = new QMessageBox(QMessageBox::Critical, "Erreur d'entrée", ""); // construction d une info-bulle
+        msgBox1->setText("<p align='center'>Le réel doit correspondre aux patrons suivants :</p>\n<p align='center'>xxxxxxxxxx</p>\n<p align='center'>-xxxxxxxxxx</p>\n<p align='center'>xxxxxxxxxx.xxxxxx</p>\n<p align='center'>-xxxxxxxxxx.xxxxxx</p>"); // HTML !
+        msgBox1->setFont(QFont("Helvetica", 9));
+        msgBox1->exec(); // execution de l info bulle
     }
 }
