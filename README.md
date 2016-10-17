@@ -44,7 +44,7 @@ Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2
 
 <p>Voici la seule classe utilisée dans ce projet. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
 
-_________________________________________________
+<p>_________________________________________________
 |                                                 |\
 |	<strong>fenetre.h</strong>                                   |\
 |	 ___________________________________________  |__\
@@ -65,7 +65,7 @@ _________________________________________________
 |	|	public slots:                           |     |
 |	|		void onClick()                      |     |
 |	|___________________________________________|     |
-|_____________________________________________________|
+|_____________________________________________________|</p>
 
 ####  Description
 
