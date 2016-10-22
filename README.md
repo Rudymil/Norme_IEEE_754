@@ -20,7 +20,7 @@ textuelle.<br/>
 Le choix du langage est laissé à l'appréciation de chacun-e.<br/>
 Le livrable attendu est un projet sur gitlab (sous votre compte dans le groupe
 TSI2106) avec le code source (analyse, code, chaîne de compilation/livraison) et une
-vidéo démontrant le résultat (pas plus de 2mn).
+vidéo démontrant le résultat (pas plus de 2mn).<br/>
 »</p>
 
 <p>La structure du logiciel sera la base de l'évaluation (découpage, ré-utilisabilité,
@@ -111,11 +111,13 @@ Elle appelle cependant les deux fonctions "binaire_post_coma" et "binaire_post_c
 
 ####  Installation
 
-<p>Pour utiliser l'application, il suffit tout simplement de lancer un des exécutables suivants :</p>
+<p>Pour utiliser l'application (testée uniquement sur Windows 10), il suffit tout simplement de lancer un des exécutables suivants :</p>
 
 <p>build-code-Desktop_Qt_5_7_0_MinGW_32bit-Debug\debug\code.exe<br/>
 build-code-Desktop_Qt_5_7_0_MinGW_32bit-Profile\release\code.exe<br/>
 build-code-Desktop_Qt_5_7_0_MinGW_32bit-Release\release\code.exe</p>
+
+<p>Pour d'autre OS, une recompilation du code source est possible et nécessaire.</p>
 
 ####  Bibliographie
 
@@ -148,3 +150,7 @@ build-code-Desktop_Qt_5_7_0_MinGW_32bit-Release\release\code.exe</p>
 <a href="https://openclassrooms.com/forum/sujet/passage-de-valeur-par-la-methode-connect-qt?page=1#message-91333711">Passage de valeur par la méthode "connect" Qt</a>
 
 <a href="https://openclassrooms.com/forum/sujet/conversion-qstring-const-char?page=1#message-91343120">Conversion : QString -> const char</a>
+
+<p>Démonstration :</p>
+
+<a href="https://www.youtube.com/watch?v=kH-Mc10AYOM">ProjetPersonnel1 Rudolf MILLET</a>
