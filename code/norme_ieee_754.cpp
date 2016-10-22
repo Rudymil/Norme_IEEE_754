@@ -10,13 +10,14 @@ void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){
     int decalage(0); // valeur
     sprintf(reel, const_reel); // converti ou plutot copie const char* -> char
 
-    // tests unittaires
+    // tests unitaires
     // sprintf(reel,"-0"); // 1000 0000 0000 0000 0000 0000 0000 0000
     // sprintf(reel,"0"); // 0000 0000 0000 0000 0000 0000 0000 0000
     // sprintf(reel,"-1"); // 1011 1111 1111 0000 0000 0000 0000 0000
     // sprintf(reel,"1"); // 0011 1111 1111 0000 0000 0000 0000 0000
     // sprintf(reel,"-118.625"); // 1100 0010 1110 1101 0100 0000 0000 0000
     // sprintf(reel,"-6.625"); // 1100 0000 1101 0100 0000 0000 0000 0000
+    // sprintf(reel,"-1039"); // 1100 0100 1000 0001 1110 0000 0000 0000
 
     printf("\n******************************************\n");
     printf("* Le réel à convertir = %s *\n",reel);
