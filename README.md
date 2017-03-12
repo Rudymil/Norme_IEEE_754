@@ -44,16 +44,18 @@ Le code a été écrit en C++11 dans Qt Creator 4.1.0 basé sur Qt 5.7.0 (MSVC 2
 
 <p>Voici la seule classe utilisée dans ce projet et écrite dans <strong>"fenetre.h"</strong>. Il s'agit d'une classe Qt qui permet la construction d'une simple fenêtre composée au moins d'un champs d'entrée et d'un bouton de validation. A cette classe est attachée une unique fonction connectée au bouton et qui lance le programme principal.</p>
 
-<p>fenetre : public QWidget<br/>
-____public:<br/>
-________fenetre(QWidget * owner = nullptr)<br/>
-____private:<br/>
-________QLabel *titre<br/>
-________QLineEdit *reel<br/>
-________QPushButton *conversion<br/>
-________QLabel *resultat<br/>
-____public slots:<br/>
-________void onClick()</p>
+```C++
+	fenetre : public QWidget
+	public:
+		fenetre(QWidget * owner = nullptr)
+	private:
+		QLabel *titre
+		QLineEdit *reel
+		QPushButton *conversion
+		QLabel *resultat
+	public slots:
+		void onClick()
+```
 
 ####  Description
 
@@ -61,51 +63,71 @@ ________void onClick()</p>
 
 <p>Dans <strong>"fenetre.cpp"</strong> se trouve le constructeur de la fenêtre et la fonction connectée au bouton :</p>
 
-<code>fenetre::fenetre(QWidget *owner):QWidget{owner},titre{new QLabel{"",this}},reel{new QLineEdit{"",this}},conversion{new QPushButton{"run_project",this}},resultat{new QLabel{"",this}}{...}</code>
-
+```C++
+fenetre::fenetre(QWidget *owner):QWidget{owner},titre{new QLabel{"",this}},reel{new QLineEdit{"",this}},conversion{new QPushButton{"run_project",this}},resultat{new QLabel{"",this}}{...}
+```
 <p>Cette classe gère les paramètres de la fenêtre.</p>
 
-<code>void fenetre::onClick(){...}</code>
-
+```C++
+void fenetre::onClick(){...}
+```
 <p>Cette fonction s'assure que le réel à convertir est correctement écrit.</p>
 
 <p>Dans <strong>"norme_ieee_754.cpp"</strong> se trouve la fonction principale appelée dans "fenetre.cpp" et toutes les fonctions annexes :</p>
 
-<code>void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){...}</code>
+```C++
+void norme_ieee_754(const char *const_reel, char *binaire_ieee_754){...}
+```
 
 <p>Il s'agit du programme principale qui appelle dans l'ordre les fonctions en annexes.<br/>
 Elle prend en entrée 2 chaînes de caractères : une constante et une à remplir.</p>
 
-<code>void f_signe(char *reel, char *binaire_ieee_754){...}</code>
+```C++
+void f_signe(char *reel, char *binaire_ieee_754){...}
+```
 
 <p>Cette fonction ajoute 1 ou 0 au binaire en fonction du signe du reel en entrée.</p>
 
-<code>void f_binaire(char *reel, char *binaire_sans_signe){...}</code>
+```C++
+void f_binaire(char *reel, char *binaire_sans_signe){...}
+```
 
 <p>Cette fonction fabrique simplement le binaire du reel en entrée.<br/>
 Elle appelle cependant les deux fonctions "binaire_post_coma" et "binaire_post_coma" pour traiter le réel en deux parties avant de concaténer les 2 binaires obtenus.</p>
 
-<code>int f_virgule_mantisse(char *binaire_sans_signe, char *reel){...}</code>
+```C++
+int f_virgule_mantisse(char *binaire_sans_signe, char *reel){...}
+```
 
 <p>Cette fonction fabrique la mantisse du binaire normé en procédant au décalage de la virgule en fonction du réel d'entrée. Le décalage est renvoyé en sortie. La chaîne de caractères ainsi modifiée doit contenir toujours 25 caractères à la fin, à savoir la taille de la mantisse plus la virgule et le binaire implicite. On procède donc à un rajout ou à une suppression de bits.</p>
 
-<code>void f_exposant(char *binaire_exposant, char *reel, int decalage){...}</code>
+```C++
+void f_exposant(char *binaire_exposant, char *reel, int decalage){...}
+```
 
 <p>Cette fonction fabrique l'exposant de taille 9 en fonction du décalage mesuré. Certaines exceptions sont prises en compte dans le processus d'où la présence du réel en entrée.</p>
 
-<code>int binaire_ante_coma(int quotient, char *b_a_c){...}</code>
+```C++
+int binaire_ante_coma(int quotient, char *b_a_c){...}
+```
 
 <p>Cette fonction convertie en binaire la partie entière d'un réel.</p>
 
-<code>void binaire_post_coma(float decimale, int t_b_a_c, char *b_p_c){...}</code>
+```C++
+void binaire_post_coma(float decimale, int t_b_a_c, char *b_p_c){...}
+```
 
 <p>Cette fonction convertie en binaire la partie décimale d'un réel.</p>
 
-<code>void remove_coma(char *binaire_exposant){...}</code>
+```C++
+void remove_coma(char *binaire_exposant){...}
+```
 
 <p>Cette fonction supprime la virgule et le bit implicite de la mantisse. La mantisse possède donc bien 23 bits.</p>
 
-<code>void affichage_console(char *binaire_ieee_754, char *reel){...}</code>
+```C++
+void affichage_console(char *binaire_ieee_754, char *reel){...}
+```
 
 <p>Cette fonction gère un affichage propre du résultat final dans le terminal.</p>
 
